@@ -1,7 +1,8 @@
 package pers.lxs.leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 import org.junit.Test;
@@ -11,8 +12,70 @@ public class Solution {
 	@Test
 	public void test() {
 		
-		String str = "){";
-		System.out.println(isValid(str));
+		int n = 3;
+		List<String> list = generateParenthesis(n);
+		Iterator<String> iterator = list.iterator();
+		while(iterator.hasNext()) {
+			String string = iterator.next();
+			System.out.println(string);
+		}
+	}
+	
+	public List<String> generateParenthesis(int n) {
+        
+		LinkedList<String> resultList = new LinkedList<String>();
+		
+		if(n == 0) {
+			return resultList;
+		}
+		
+		int left = n - 1;	int right = n - 1;
+
+		String str = "(";
+		
+		generateParenthesis(str, left, right, resultList);
+		
+		return resultList;
+    }
+	
+	private void generateParenthesis(String str, int left, int right, LinkedList<String> list) {
+		
+		if(left > right + 1) {
+			return;
+		}
+		
+		if(left <= 0) {
+			
+			while(right > 0) {
+				str += ")";
+				right--;
+			}
+			str += ")";
+			
+			if(isValid(str)) {
+				list.add(str);
+			}
+			
+			return;
+		}
+		
+		if(right <= 0) {
+			
+			while(left > 0) {
+				str += "(";
+				left--;
+			}
+			str += ")";
+			
+			if(isValid(str)) {
+				list.add(str);
+			}
+			
+			return;
+		}
+		
+		generateParenthesis(str + "(", left - 1, right, list);
+		generateParenthesis(str + ")", left, right - 1, list);
 	}
 	
 	public boolean isValid(String s) {
@@ -28,6 +91,7 @@ public class Solution {
 			else if (stack.isEmpty() || stack.pop() != c)
 				return false;
 		}
+		
 		return stack.isEmpty();
     }
 	
