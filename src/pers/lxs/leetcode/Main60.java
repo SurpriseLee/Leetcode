@@ -31,13 +31,10 @@ public class Main60 {
     		list.add(i + 1);
     	}
     	
-    	int curr = n;
-    	
     	while(!list.isEmpty()) {
-    		num /= curr;
+    		num /= list.size();
     		int index = (k - 1) / num;
     		k -= num * index;
-    		curr--;
     		sb.append(list.remove(index));
     		System.out.println("index: " + index + " sb: " + sb.toString() + " list: " + list.toString());
     	}
