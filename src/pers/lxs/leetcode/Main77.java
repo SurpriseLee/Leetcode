@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class Main76 {
+public class Main77 {
 	
 	@Test
 	public void test() {
